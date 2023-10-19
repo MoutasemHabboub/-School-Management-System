@@ -110,6 +110,7 @@ export class AttendanceService {
         classId: 'asc',
       },
     });
+    console.log(attendances);
     const classes = await this.send('getUserClasses', { id: userId });
     console.log(classes);
     let result;
