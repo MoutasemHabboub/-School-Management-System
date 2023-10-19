@@ -10,7 +10,6 @@ import {
 export class LoginUserDto {
   @IsNotEmpty()
   @IsString()
-  @MinLength(4)
   @ApiProperty()
   userName: string;
 
