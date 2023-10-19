@@ -39,10 +39,10 @@ export class JwtAuthGuard implements CanActivate {
     //   ],
     // };
     const pattern = { cmd: 'authenticate' };
-    const meta = { headers:context.switchToHttp().getRequest().headers }; // send all headers
+    const meta = { headers: context.switchToHttp().getRequest().headers }; // send all headers
     const payload = meta; // any additional payload you may have.
     console.log(context.switchToHttp().getRequest().headers);
-    return this.authClient.send<any>('authenticate', payload, meta).pipe(
+    return this.authClient.send<any>('authenticate', payload).pipe(
       tap((res) => {
         context.switchToHttp().getRequest().user = res;
       }),

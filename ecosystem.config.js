@@ -19,21 +19,21 @@ module.exports = {
       exec_mode: 'fork',
       instances: 1, // Or a number of instances
       script: 'pnpm',
-      args: 'run auth:production',
+      args: 'run start:dev auth',
     },
     {
       name: 'mo-api-attendance',
       exec_mode: 'fork',
       instances: 1, // Or a number of instances
       script: 'pnpm',
-      args: 'run start:dev',
+      args: 'run start:dev attendance',
     },
     {
       name: 'mo-api-registration',
       exec_mode: 'fork',
       instances: 1, // Or a number of instances
       script: 'pnpm',
-      args: 'run  start:dev',
+      args: 'run  start:dev registration',
     },
   ],
 };

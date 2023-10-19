@@ -37,3 +37,6 @@ lerna-debug.log*
 /apps/auth/prisma/client
 /apps/registration/prisma/client
 /apps/attendance/prisma/client
+/apps/auth/prisma/dev.db
+/apps/registration/prisma/dev.db
+/apps/attendance/prisma/dev.db
