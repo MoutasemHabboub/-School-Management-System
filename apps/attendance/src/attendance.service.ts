@@ -97,7 +97,10 @@ export class AttendanceService {
     return studentClasses;
   }
 
-  async getAttendanceClass({ userId, classId }: GetUserAttendedSession) {
+  async getAttendanceClass(data: GetUserAttendedSession) {
+    const userId = Number(data.userId);
+    const classId = Number(data.classId);
+    console.log(data);
     const attendances = await this.prisma.attendance.findMany({
       where: {
         userId: Number(userId),
@@ -108,6 +111,7 @@ export class AttendanceService {
       },
     });
     const classes = await this.send('getUserClasses', { id: userId });
+    console.log(classes);
     let result;
     for (const studentClass of classes) {
       studentClass.class.percentage =
@@ -123,6 +127,7 @@ export class AttendanceService {
         ? true
         : false;
     }
+    console.log(result);
 
     return result;
   }
