@@ -5,28 +5,28 @@ module.exports = {
       exec_mode: 'fork',
       instances: 1, // Or a number of instances
       script: 'pnpm',
-      args: 'run start:dev',
+      args: ' start:dev',
     },
     {
       name: 'mo-api-auth',
       exec_mode: 'fork',
       instances: 1, // Or a number of instances
       script: 'pnpm',
-      args: 'run start:dev auth',
+      args: ' start:dev auth',
     },
     {
       name: 'mo-api-attendance',
       exec_mode: 'fork',
       instances: 1, // Or a number of instances
       script: 'pnpm',
-      args: 'run start:dev attendance',
+      args: ' start:dev attendance',
     },
     {
       name: 'mo-api-registration',
       exec_mode: 'fork',
       instances: 1, // Or a number of instances
       script: 'pnpm',
-      args: 'run  start:dev registration',
+      args: '  start:dev registration',
     },
   ],
 };
