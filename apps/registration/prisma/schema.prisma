@@ -1,0 +1,47 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+    provider        = "prisma-client-js"
+    output          = "./client"
+    previewFeatures = ["fullTextSearch", "fullTextIndex"]
+    binaryTargets   = ["native"]
+}
+
+datasource db {
+    provider = "sqlite"
+    url      = env("DATABASE_URL")
+}
+
+model Class {
+    id            Int            @id @default(autoincrement())
+    name          String         @unique
+    createdAt     DateTime       @default(now()) @map("created_at")
+    updatedAt     DateTime?      @updatedAt @map("updated_at")
+    deletedAt     DateTime?      @map("deleted_at")
+    sessions      Session[]
+    registrations Registration[]
+}
+
+model Session {
+    id        Int       @id @default(autoincrement())
+    title     String    @unique
+    classId   Int       @map("class_id")
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime? @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+    class     Class     @relation(fields: [classId], references: [id], onDelete: Cascade)
+}
+
+model Registration {
+    id        Int       @id @default(autoincrement())
+    userId    Int       @map("user_id")
+    classId   Int       @map("class_id")
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime? @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+    completed Boolean?  @default(false)
+    class     Class     @relation(fields: [classId], references: [id], onDelete: Cascade)
+
+    @@unique([classId, userId], map: "ux_class_user")
+}
