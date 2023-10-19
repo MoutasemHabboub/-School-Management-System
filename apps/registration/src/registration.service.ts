@@ -25,6 +25,7 @@ export class RegistrationService {
         },
       },
     });
+    console.log(data);
     return { arr: data };
   }
 
