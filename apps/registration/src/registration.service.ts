@@ -12,7 +12,7 @@ export class RegistrationService {
   constructor(private readonly prisma: PrismaService) {}
 
   async getUserClasses(id): Promise<any> {
-    return await this.prisma.registration.findMany({
+    const data = await this.prisma.registration.findMany({
       where: {
         userId: Number(id),
       },
@@ -25,6 +25,7 @@ export class RegistrationService {
         },
       },
     });
+    return data['class']
   }
 
   async getUserUnRegisterClasses(id): Promise<any> {
