@@ -36,6 +36,7 @@ export class ClassService {
       },
       include: {
         sessions: true,
+        _count: true,
       },
     });
   }
