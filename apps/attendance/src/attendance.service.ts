@@ -2,7 +2,7 @@ import { BadRequestException, Inject, Injectable } from '@nestjs/common';
 import { PrismaService } from './prisma.service';
 import { ClientProxy } from '@nestjs/microservices';
 import { AttendSessionDto } from './dto/AttendSession.dto';
-import { lastValueFrom } from 'rxjs';
+import { lastValueFrom, toArray } from 'rxjs';
 import { GetUserAttendedSession } from './dto/GetUserAttendedSession.dto';
 
 @Injectable()
@@ -13,11 +13,12 @@ export class AttendanceService {
     private readonly registrationClient: ClientProxy,
   ) {}
   async send(cmd, data): Promise<any> {
-    console.log(this.registrationClient.send({ cmd }, data));
-    const t = await lastValueFrom(this.registrationClient.send({ cmd }, data));
-    console.log(t);
-    console.log(t[0].arr);
-    return t[0].arr;
+    const result = await lastValueFrom(
+      this.registrationClient.send({ cmd }, data).pipe(toArray()),
+    );
+    console.log('koko');
+    console.log(result);
+    return result;
   }
 
   async attendSession({ userId, sessionId, classId }: AttendSessionDto) {
