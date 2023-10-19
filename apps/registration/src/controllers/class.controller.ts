@@ -13,8 +13,8 @@ export class ClassController {
   }
   @Get()
   @MessagePattern({ cmd: 'getClasses' })
-  async getClasses() {
-    return this.classService.getClasses();
+  async getClasses(@Body('id') id) {
+    return this.classService.getClasses(id);
   }
   @Get()
   @MessagePattern({ cmd: 'getClass' })

@@ -5,11 +5,18 @@ import { PrismaService } from '../prisma.service';
 export class ClassService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getClasses(): Promise<any> {
-    return await this.prisma.class.findMany({
+  async getClasses(id): Promise<any> {
+    return await this.prisma.registration.findMany({
+      where: {
+        userId: Number(id),
+      },
       include: {
-        sessions: true,
-        _count: true,
+        class: {
+          include: {
+            sessions: true,
+            _count: true,
+          },
+        },
       },
     });
   }

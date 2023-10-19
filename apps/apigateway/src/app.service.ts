@@ -21,8 +21,8 @@ export class AppService {
   async signup(@Body() createUserDto: CreateUserDto) {
     return await this.authClient.send({ cmd: 'signup' }, createUserDto);
   }
-  async getClasses() {
-    return await this.registrationClient.send({ cmd: 'getClasses' }, {});
+  async getClasses(id) {
+    return await this.registrationClient.send({ cmd: 'getClasses' }, { id });
   }
   async getClass(id) {
     return await this.registrationClient.send({ cmd: 'getClass' }, { id });
@@ -53,5 +53,11 @@ export class AppService {
   }
   async getAttendance(id) {
     return await this.attendanceClient.send({ cmd: 'getAttendance' }, { id });
+  }
+  async getAttendanceClass(id, classId) {
+    return await this.attendanceClient.send(
+      { cmd: 'getAttendanceClass' },
+      { userId: id, classId },
+    );
   }
 }

@@ -2,6 +2,7 @@ import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AttendanceService } from './attendance.service';
 import { MessagePattern } from '@nestjs/microservices';
 import { AttendSessionDto } from './dto/AttendSession.dto';
+import { GetUserAttendedSession } from './dto/GetUserAttendedSession.dto';
 
 @Controller()
 export class AttendanceController {
@@ -17,5 +18,11 @@ export class AttendanceController {
   @MessagePattern({ cmd: 'getAttendance' })
   async getAttendance(@Body('id') id) {
     return this.attendanceService.getAttendance(id);
+  }
+
+  @Get()
+  @MessagePattern({ cmd: 'getAttendanceClass' })
+  async getAttendanceClass(@Body() data: GetUserAttendedSession) {
+    return this.attendanceService.getAttendanceClass(data);
   }
 }

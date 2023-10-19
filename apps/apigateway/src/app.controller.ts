@@ -32,7 +32,7 @@ export class AppController {
   @Get('classes')
   @ApiBearerAuth()
   async getClasses(@CurrentUser() user: any) {
-    return this.appService.getClasses();
+    return this.appService.getClasses(user.id);
   }
 
   @UseGuards(JwtAuthGuard)
@@ -72,7 +72,13 @@ export class AppController {
   async getAttendance(@CurrentUser() user: any) {
     return this.appService.getAttendance(user.id);
   }
-
+  @UseGuards(JwtAuthGuard)
+  @Get('get-attendance-class/:id')
+  @ApiBearerAuth()
+  @ApiParam({ type: Number, name: 'id' })
+  async getAttendanceClass(@CurrentUser() user: any, @Param('id') id: number) {
+    return this.appService.getAttendanceClass(user.id, id);
+  }
   @UseGuards(JwtAuthGuard)
   @Post('attend-session')
   @ApiBearerAuth()
