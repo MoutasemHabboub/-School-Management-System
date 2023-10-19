@@ -18,7 +18,9 @@ export class UsersService {
         OR: [{ email: createUserDto.email, userName: createUserDto.userName }],
       },
     });
+    console.log(user)
     if (user) {
+      console.log(user)
       return new UnprocessableEntityException(
         'Email or username already exists.',
       );
