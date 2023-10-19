@@ -9,7 +9,6 @@ import { Transport } from '@nestjs/microservices';
 
 import { NestExpressApplication } from '@nestjs/platform-express';
 import { useContainer } from 'class-validator';
-import { ConfigService } from '@nestjs/config';
 import { RegistrationModule } from './registration.module';
 
 async function bootstrap() {
@@ -19,7 +18,6 @@ async function bootstrap() {
       cors: true,
     },
   );
-  const configService = app.get(ConfigService);
   useContainer(app.select(RegistrationModule), { fallbackOnErrors: true });
 
   if (process.env.ENV == 'production') {
