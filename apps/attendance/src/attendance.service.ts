@@ -3,6 +3,7 @@ import { PrismaService } from './prisma.service';
 import { ClientProxy } from '@nestjs/microservices';
 import { AttendSessionDto } from './dto/AttendSession.dto';
 import { lastValueFrom } from 'rxjs';
+import { GetUserAttendedSession } from './dto/GetUserAttendedSession.dto';
 
 @Injectable()
 export class AttendanceService {
@@ -43,6 +44,15 @@ export class AttendanceService {
       },
     });
   }
+  async getUserAttendedSession({ userId, classId }: GetUserAttendedSession) {
+    const attendance = await this.prisma.attendance.findMany({
+      where: {
+        userId,
+        classId,
+      },
+    });
+    return attendance;
+  }
   async getAttendance(userId) {
     const attendances = await this.prisma.attendance.findMany({
       where: {
@@ -73,6 +83,15 @@ export class AttendanceService {
         100;
       studentClass.class.registeredAt = studentClass.createdAt;
       studentClasses.push(studentClass.class);
+    }
+    for (const studentClass of studentClasses) {
+      for (const session of studentClass.sessions) {
+        session.attendance = groupedByClassId[`${studentClass.id}`]?.find(
+          (attendance) => attendance.sessionId === session.id,
+        )
+          ? true
+          : false;
+      }
     }
 
     return studentClasses;
