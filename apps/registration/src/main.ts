@@ -47,7 +47,7 @@ async function bootstrap() {
   app.connectMicroservice({
     transport: Transport.TCP,
     options: {
-      port: 3040,
+      port: 3440,
     },
   });
   const host = process.env.AUTH_HOST || 'localhost';
