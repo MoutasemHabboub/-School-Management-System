@@ -26,6 +26,20 @@ export class RegistrationService {
       },
     });
   }
+
+  async getUserUnRegisterClasses(id): Promise<any> {
+    return await this.prisma.class.findMany({
+      where: {
+        registrations: {
+          every: { NOT: { userId: Number(id) } },
+        },
+      },
+      include: {
+        sessions: true,
+        _count: true,
+      },
+    });
+  }
   async RegisterInNewClass(data: RegisterInNewClassDto): Promise<any> {
     const classData = await this.prisma.class.findUnique({
       where: {

@@ -67,6 +67,13 @@ export class AppController {
   }
 
   @UseGuards(JwtAuthGuard)
+  @Get('get-user-unregister-class')
+  @ApiBearerAuth()
+  async getUserUnRegisterClasses(@CurrentUser() user: any) {
+    return this.appService.getUserUnRegisterClasses(user.id);
+  }
+
+  @UseGuards(JwtAuthGuard)
   @Get('get-attendance')
   @ApiBearerAuth()
   async getAttendance(@CurrentUser() user: any) {

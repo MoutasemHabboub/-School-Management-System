@@ -23,6 +23,13 @@ export class RegistrationController {
   }
 
   @Get()
+  @MessagePattern({ cmd: 'getUserUnRegisterClasses' })
+  async getUserUnRegisterClasses(@Body('id') id) {
+    console.log(id);
+    return await this.registrationService.getUserUnRegisterClasses(id);
+  }
+
+  @Get()
   @MessagePattern({ cmd: 'CheckRegisterFromClass' })
   async CheckRegisterFromClass(@Body() data: CheckRegisterFromClassDto) {
     console.log(data);

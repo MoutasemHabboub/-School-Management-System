@@ -39,6 +39,12 @@ export class AppService {
       { id },
     );
   }
+  async getUserUnRegisterClasses(id) {
+    return await this.registrationClient.send(
+      { cmd: 'getUserUnRegisterClasses' },
+      { id },
+    );
+  }
   async getClassesWithRegister() {
     return await this.registrationClient.send(
       { cmd: 'getClassesWithRegister' },
