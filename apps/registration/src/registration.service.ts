@@ -25,7 +25,7 @@ export class RegistrationService {
         },
       },
     });
-    return data['class']
+    return data
   }
 
   async getUserUnRegisterClasses(id): Promise<any> {
