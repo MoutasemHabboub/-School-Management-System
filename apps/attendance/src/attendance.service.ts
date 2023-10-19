@@ -18,7 +18,7 @@ export class AttendanceService {
     );
     console.log('koko');
     console.log(result);
-    return result;
+    return result[0];
   }
 
   async attendSession({ userId, sessionId, classId }: AttendSessionDto) {
