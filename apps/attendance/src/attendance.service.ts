@@ -14,7 +14,8 @@ export class AttendanceService {
   ) {}
   async send(cmd, data): Promise<any> {
     console.log(this.registrationClient.send({ cmd }, data));
-    return await lastValueFrom(this.registrationClient.send({ cmd }, data));
+    return (await lastValueFrom(this.registrationClient.send({ cmd }, data)))
+      .arr;
   }
 
   async attendSession({ userId, sessionId, classId }: AttendSessionDto) {
