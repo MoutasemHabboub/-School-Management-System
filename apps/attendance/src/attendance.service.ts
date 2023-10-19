@@ -13,7 +13,8 @@ export class AttendanceService {
     private readonly registrationClient: ClientProxy,
   ) {}
   async send(cmd, data): Promise<any> {
-    return await this.registrationClient.send({ cmd }, data);
+    return (await lastValueFrom(this.registrationClient.send({ cmd }, data)))
+      .arr;
   }
 
   async attendSession({ userId, sessionId, classId }: AttendSessionDto) {
