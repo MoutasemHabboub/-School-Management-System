@@ -26,7 +26,7 @@ import { CommonModule } from '@app/common';
         name: 'ATTENDANCE_SERVICE',
         transport: Transport.TCP,
         options: {
-          port: 3003,
+          port: 3033,
         },
       },
     ]),
