@@ -11,7 +11,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
         name: 'REGISTRATION_SERVICE',
         transport: Transport.TCP,
         options: {
-          port: 3004,
+          port: 3040,
         },
       },
     ]),

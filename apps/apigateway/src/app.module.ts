@@ -19,7 +19,7 @@ import { CommonModule } from '@app/common';
         name: 'REGISTRATION_SERVICE',
         transport: Transport.TCP,
         options: {
-          port: 3004,
+          port: 3040,
         },
       },
       {
