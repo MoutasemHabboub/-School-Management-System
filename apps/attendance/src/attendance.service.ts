@@ -72,6 +72,7 @@ export class AttendanceService {
     const groupedByClassId = attendances.reduce(
       (acc, attendance) => {
         const { classId } = attendance;
+        console.log(classId);
         if (!acc[classId]) {
           acc[Number(classId)] = [];
         }
