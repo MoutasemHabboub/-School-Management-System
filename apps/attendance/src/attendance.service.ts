@@ -84,7 +84,7 @@ export class AttendanceService {
     console.log(groupedByClassId);
     console.log(groupedByClassId['1']);
     for (const studentClass of classes) {
-      console.log(studentClass.id + '');
+      console.log(studentClass.id + "");
       studentClass.class.percentage =
         ((groupedByClassId[studentClass.id + '']?.length ?? 0) /
           studentClass.class.sessions.length) *
