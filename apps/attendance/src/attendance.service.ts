@@ -106,24 +106,28 @@ export class AttendanceService {
     const userId = Number(data.userId);
     const classId = Number(data.classId);
     console.log(data);
+    console.log('userId');
     const attendances = await this.prisma.attendance.findMany({
       where: {
-        userId: Number(userId),
-        classId: Number(classId),
+        AND: [{ userId: Number(userId) }, { classId: Number(classId) }],
       },
       orderBy: {
         classId: 'asc',
       },
     });
+
     console.log(attendances);
     const classes = await this.send('getUserClasses', { id: userId });
     console.log(classes);
     let result;
     for (const studentClass of classes) {
-      studentClass.class.percentage =
-        ((attendances?.length ?? 0) / studentClass.class.sessions.length) * 100;
-      studentClass.class.registeredAt = studentClass.createdAt;
-      result = studentClass.class;
+      if (studentClass.class.id == classId) {
+        result = studentClass.class;
+        result.percentage =
+          ((attendances?.length ?? 0) / studentClass.class.sessions.length) *
+          100;
+        result.registeredAt = studentClass.createdAt;
+      }
     }
 
     for (const session of result.sessions) {
