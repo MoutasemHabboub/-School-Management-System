@@ -81,6 +81,8 @@ export class AttendanceService {
       {} as Record<number, typeof attendances>,
     );
     const studentClasses = [];
+    const objectArray = Object.entries(groupedByClassId);
+
     for (const studentClass of classes) {
       const t = studentClass.id.toString();
       studentClass.class.percentage =
@@ -88,11 +90,11 @@ export class AttendanceService {
           studentClass.class.sessions.length) *
         100;
 
-      const objectArray = Object.entries(groupedByClassId);
 
       objectArray.forEach(([key, value]) => {
+        console.log(t, key);
         if (key == t) {
-          console.log('soso')
+          console.log('soso');
           studentClass.class.percentage =
             ((value.length ?? 0) / studentClass.class.sessions.length) * 100;
         }
