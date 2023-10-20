@@ -81,18 +81,16 @@ export class AttendanceService {
       {} as Record<number, typeof attendances>,
     );
     const studentClasses = [];
-    console.log(groupedByClassId);
-    console.log(groupedByClassId['1']);
     for (const studentClass of classes) {
-      console.log(studentClass.id + "");
+      const t = studentClass.id.toString();
+      console.log(t);
+      console.log(studentClass.id.toString());
       studentClass.class.percentage =
         ((groupedByClassId[studentClass.id + '']?.length ?? 0) /
           studentClass.class.sessions.length) *
         100;
       studentClass.class.registeredAt = studentClass.createdAt;
       console.log(groupedByClassId[studentClass.id.toString()]);
-      console.log(studentClass.class.sessions.length);
-      console.log(studentClass.class);
       studentClasses.push(studentClass.class);
     }
     for (const studentClass of studentClasses) {
