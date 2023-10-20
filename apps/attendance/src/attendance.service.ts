@@ -88,7 +88,8 @@ export class AttendanceService {
           studentClass.class.sessions.length) *
         100;
       studentClass.class.registeredAt = studentClass.createdAt;
-
+      console.log(groupedByClassId[`${studentClass.id}`]?.length)
+      console.log(studentClass.class.sessions.length)
       console.log(studentClass.class);
       studentClasses.push(studentClass.class);
     }
