@@ -83,13 +83,21 @@ export class AttendanceService {
     const studentClasses = [];
     for (const studentClass of classes) {
       const t = studentClass.id.toString();
-      console.log(t);
-      console.log(typeof t);
-      console.log(`${t}`);
       studentClass.class.percentage =
         ((groupedByClassId[t + '']?.length ?? 0) /
           studentClass.class.sessions.length) *
         100;
+
+      const objectArray = Object.entries(groupedByClassId);
+
+      objectArray.forEach(([key, value]) => {
+        if (key == t) {
+          console.log('soso')
+          studentClass.class.percentage =
+            ((value.length ?? 0) / studentClass.class.sessions.length) * 100;
+        }
+      });
+
       studentClass.class.registeredAt = studentClass.createdAt;
       console.log(groupedByClassId[studentClass.id.toString()]);
       studentClasses.push(studentClass.class);
