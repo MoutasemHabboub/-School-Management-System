@@ -73,9 +73,9 @@ export class AttendanceService {
       (acc, attendance) => {
         const { classId } = attendance;
         if (!acc[classId]) {
-          acc[classId] = [];
+          acc[Number(classId)] = [];
         }
-        acc[classId].push(attendance);
+        acc[Number(classId)].push(attendance);
         return acc;
       },
       {} as Record<number, typeof attendances>,
@@ -84,11 +84,11 @@ export class AttendanceService {
     console.log(groupedByClassId);
     for (const studentClass of classes) {
       studentClass.class.percentage =
-        ((groupedByClassId[studentClass.id.toString()]?.length ?? 0) /
+        ((groupedByClassId[studentClass.id]?.length ?? 0) /
           studentClass.class.sessions.length) *
         100;
       studentClass.class.registeredAt = studentClass.createdAt;
-      console.log(groupedByClassId[studentClass.id.toString()]);
+      console.log(groupedByClassId[studentClass.id]);
       console.log(studentClass.class.sessions.length);
       console.log(studentClass.class);
       studentClasses.push(studentClass.class);
