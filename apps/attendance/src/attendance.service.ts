@@ -81,6 +81,7 @@ export class AttendanceService {
       {} as Record<number, typeof attendances>,
     );
     const studentClasses = [];
+    console.log(groupedByClassId);
     const objectArray = Object.entries(groupedByClassId);
 
     for (const studentClass of classes) {
@@ -89,7 +90,6 @@ export class AttendanceService {
         ((groupedByClassId[t + '']?.length ?? 0) /
           studentClass.class.sessions.length) *
         100;
-
 
       objectArray.forEach(([key, value]) => {
         console.log(t, key);
