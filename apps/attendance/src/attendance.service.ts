@@ -69,18 +69,14 @@ export class AttendanceService {
     });
     const classes = await this.send('getUserClasses', { id: userId });
 
-    const groupedByClassId = attendances.reduce(
-      (acc, attendance) => {
-        const { classId } = attendance;
-        console.log(classId);
-        if (!acc[classId]) {
-          acc[Number(classId)] = [];
-        }
-        acc[Number(classId)].push(attendance);
-        return acc;
-      },
-      {} as Record<number, typeof attendances>,
-    );
+    const groupedByClassId = [];
+    for (const attendance of attendances) {
+      if (!groupedByClassId[attendance.classId]) {
+        groupedByClassId[Number(attendance.classId)] = [];
+      }
+      groupedByClassId[Number(attendance.classId)].push(attendance);
+    }
+
     const studentClasses = [];
     console.log(groupedByClassId);
     for (const studentClass of classes) {
